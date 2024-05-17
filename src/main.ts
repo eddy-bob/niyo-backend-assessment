@@ -15,6 +15,6 @@ async function bootstrap() {
       exceptionFactory: validationExceptionFactory,
     }),
   );
-  await app.listen(3000);
+  await app.listen(config.get('port'));
 }
 bootstrap();
