@@ -75,7 +75,6 @@ export class TaskController {
     return this.taskService.removeTask(id);
   }
 
-  @Roles(Role.ADMIN)
   @Get('')
   @HttpCode(HttpStatus.FOUND)
   findAll(
