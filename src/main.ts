@@ -8,7 +8,7 @@ import { validationExceptionFactory } from './utils/validation';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const config: ConfigService = app.get(ConfigService);
-  app.setGlobalPrefix('v1');
+  app.setGlobalPrefix('api/v1');
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,

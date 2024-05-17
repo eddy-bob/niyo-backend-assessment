@@ -56,6 +56,12 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Running the apis
+
+Things to note:
+Each api has a prefix of api/v1 before the actual route.
+The server runs on port 5000
+
 ### Connecting to the websocket
 
 The websocket (socket.io) runs on the port 80.
