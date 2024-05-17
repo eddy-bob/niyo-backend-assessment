@@ -5,10 +5,10 @@ import { UsersModule } from '../users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../users/entities/user.entity';
 import { LocalStrategy } from './guards/local.strategy';
-import { JwtModule } from '@nestjs/jwt';
-import configuration from 'src/config/configuration';
 import { JwtStrategy } from './guards/jwt.strategy';
 import { LoggerModule } from 'src/logger/logger.module';
+import { JwtModule } from '@nestjs/jwt';
+import configuration from 'src/config/configuration';
 
 @Module({
   imports: [

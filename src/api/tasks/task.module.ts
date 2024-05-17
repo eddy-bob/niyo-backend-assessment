@@ -7,19 +7,12 @@ import { APP_GUARD } from '@nestjs/core';
 import { UsersModule } from '../users/users.module';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { AppGateway } from 'src/app.gateway';
-import configuration from 'src/config/configuration';
-import { JwtModule } from '@nestjs/jwt';
 import { APP_GATEWAY } from 'src/constant';
+import { JwtModule } from '@nestjs/jwt';
+import configuration from 'src/config/configuration';
 
 @Module({
-  imports: [
-    UsersModule,
-    JwtModule.register({
-      secret: configuration().jwt.secret,
-      signOptions: { expiresIn: configuration().jwt.expiresIn },
-    }),
-    TypeOrmModule.forFeature([Task]),
-  ],
+  imports: [UsersModule, TypeOrmModule.forFeature([Task])],
   controllers: [TaskController],
   providers: [
     TaskService,
@@ -27,10 +20,7 @@ import { APP_GATEWAY } from 'src/constant';
       provide: APP_GUARD,
       useClass: RolesGuard,
     },
-    {
-      provide: APP_GATEWAY,
-      useClass: AppGateway,
-    },
   ],
+  exports: [TaskService],
 })
 export class TaskModule {}

@@ -12,6 +12,7 @@ import { ErrorsInterceptor } from 'src/interceptor/error.interceptor';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
 import { TaskModule } from './api/tasks/task.module';
+import { UsersModule } from './api/users/users.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { TaskModule } from './api/tasks/task.module';
     DatabaseModule,
     AuthModule,
     TaskModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [

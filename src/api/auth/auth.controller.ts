@@ -4,9 +4,6 @@ import {
   Body,
   UseGuards,
   HttpCode,
-  Get,
-  Patch,
-  Query,
   HttpStatus,
 } from '@nestjs/common';
 import { Public } from '../../decorators/public.decorator';

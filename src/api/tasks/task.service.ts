@@ -12,7 +12,6 @@ import { Task } from './entities/task.entity';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { User } from '../users/entities/user.entity';
 import { UsersService } from '../users/users.service';
-import { FindOptionsWhere } from 'typeorm';
 import { SuccessResponse } from 'src/utils/response';
 import { Status } from 'src/types/task';
 import { UpdateTaskDto } from './dto/update-task.dto';

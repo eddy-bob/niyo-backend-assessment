@@ -7,7 +7,7 @@ import { UsernameGenerator } from 'src/providers/usernameGenerator.provider';
 import { USERNAME_GENERATOR } from 'src/constant';
 
 @Module({
-  imports: [],
+  imports: [TypeOrmModule.forFeature([User])],
   controllers: [UsersController],
   providers: [
     UsersService,

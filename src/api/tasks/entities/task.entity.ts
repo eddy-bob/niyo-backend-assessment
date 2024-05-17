@@ -1,16 +1,6 @@
 import * as bcrypt from 'bcryptjs';
 import { User } from 'src/api/users/entities/user.entity';
-import {
-  BeforeInsert,
-  BeforeUpdate,
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  OneToOne,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Timestamp } from '../../../database/timestamp.entity';
 import { Status } from 'src/types/task';
