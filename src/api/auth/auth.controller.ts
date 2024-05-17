@@ -13,7 +13,6 @@ import { AuthService } from './auth.service';
 import { SignupUserDto } from './dto/signup.dto';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { RefreshTokenDto } from './dto/refresh-token.dto';
-import { STATUS_CODES } from 'http';
 
 @Controller('auth')
 export class AuthController {
@@ -32,7 +31,6 @@ export class AuthController {
   signup(@Body() signupUserDto: SignupUserDto) {
     return this.authService.signup(signupUserDto);
   }
-
 
   @Public()
   @Post('refresh')

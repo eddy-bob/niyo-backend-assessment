@@ -16,9 +16,8 @@ database_name: TYPEORM_DATABASE
 
 note!!
 TYPEORM_DATABASE is a variable in your env file. replace it with the original value in your env.
-
-The next step in setting up your app before running it is to generate migration files. Read the section after this for details on how to run migrations.
-Note that after generating migrations, you may decide to not run the migrations as they are run automatically on every app start
+Migration files have already been generated so you do not need to generate migration files.
+Migrations are run automatically on every app start
 
 ## Migrations
 
