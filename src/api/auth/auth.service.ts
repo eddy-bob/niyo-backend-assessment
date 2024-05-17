@@ -124,8 +124,8 @@ export class AuthService {
    */
   async signup(signupUserDto: SignupUserDto) {
     // create a user profile with the provided details in signup payload
-    const user = this.userRepository.create(signupUserDto);
-    await this.userRepository.save(user);
+
+    const user = await this.usersService.create(signupUserDto);
 
     // call the post signin method to return signed access-token and refresh-token
     const data = await this.postSignin(user);
