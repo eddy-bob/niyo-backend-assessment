@@ -4,4 +4,5 @@ export const ADMIN: Partial<User> = {
   firstName: 'Niyo',
   lastName: 'Admin',
   role: Role.ADMIN,
+  username: 'admin',
 };

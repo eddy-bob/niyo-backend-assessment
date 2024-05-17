@@ -60,7 +60,7 @@ $ npm run start:prod
 
 Things to note:
 Each api has a prefix of api/v1 before the actual route.
-The server runs on port 5000
+The server runs on port 5000"
 
 ### Connecting to the websocket
 
