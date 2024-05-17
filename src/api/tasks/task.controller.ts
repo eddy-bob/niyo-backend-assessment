@@ -88,7 +88,7 @@ export class TaskController {
       {
         page,
         limit,
-        route: `${this.configService.get<string>('appUrl')}/tasks/me`,
+        route: `${this.configService.get<string>('appUrl')}/tasks/`,
       },
     );
   }
