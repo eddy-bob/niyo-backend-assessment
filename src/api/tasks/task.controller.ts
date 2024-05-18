@@ -12,6 +12,7 @@ import {
   Put,
   DefaultValuePipe,
   ParseIntPipe,
+  Body,
 } from '@nestjs/common';
 
 import { TaskService } from './task.service';
@@ -35,7 +36,7 @@ export class TaskController {
   @Roles(Role.ADMIN)
   @Post('create-task')
   @HttpCode(HttpStatus.CREATED)
-  createTask(payload: CreateTaskDto) {
+  createTask(@Body() payload: CreateTaskDto) {
     return this.taskService.createTask(payload);
   }
 
@@ -43,7 +44,7 @@ export class TaskController {
   @Patch('assign-task/:id')
   @HttpCode(HttpStatus.OK)
   assignTask(
-    payload: UpdateTaskAsAdminDto,
+    @Body() payload: UpdateTaskAsAdminDto,
     @Param('id', ParseUUIDPipe) userId: string,
   ) {
     return this.taskService.assignTask(payload.user, userId);
@@ -53,7 +54,7 @@ export class TaskController {
   @Put('/:id')
   @HttpCode(HttpStatus.OK)
   updateTask(
-    payload: UpdateTaskAsAdminDto,
+    @Body() payload: UpdateTaskAsAdminDto,
     @Param('id', ParseUUIDPipe) id: string,
   ) {
     return this.taskService.updateTask(id, payload);
@@ -62,7 +63,7 @@ export class TaskController {
   @Patch('status/:id')
   @HttpCode(HttpStatus.OK)
   updateTaskStatus(
-    payload: UpdateTaskDto,
+    @Body() payload: UpdateTaskDto,
     @Param('id', ParseUUIDPipe) id: string,
     @CurrentUser() user: User,
   ) {
