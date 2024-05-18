@@ -10,7 +10,6 @@
     "postinstall": "npm run build",
     "prebuild": "rimraf dist ",
     "setupdb": "npm run migration:run && npm run seed",
-    "postbuild": "npm run migration:run",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "npm run setupdb && nest start",
     "start:dev": " npm run setupdb && nest start --watch",
