@@ -131,9 +131,12 @@ export class TaskService {
    */
   async findOne(taskId: string) {
     // find a task with the provided task id
-    const singleTask = await this.taskRepository.findOne({
-      where: { id: taskId },
-    });
+    const singleTask = await this.taskRepository
+      .createQueryBuilder('task')
+      .leftJoin('task.user', 'user')
+      .where('task.id = :id', { id: taskId })
+      .select(['task', 'user.id'])
+      .getOne();
 
     // throw a not found error if task  with provided id does not exist
     if (!singleTask) {
