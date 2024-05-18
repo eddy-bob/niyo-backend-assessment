@@ -26,7 +26,7 @@ const config = configuration();
 
 @WebSocketGateway(parseInt(config.websocket.port, 10), {
   cors: {
-    origin: [config.FrontEndUrl, config.appUrl],
+    origin: [config.socketDebugUrl, config.appUrl],
   },
 })
 export class AppGateway
@@ -36,9 +36,7 @@ export class AppGateway
     private readonly taskService: TaskService,
     @Inject(JWT)
     private readonly jwtService: Jwt,
-  ) {
-    console.log('RannnnE');
-  }
+  ) {}
 
   // initialize the native websocket server and load it onto an variable 'server'
   @WebSocketServer() server: Server;
@@ -94,7 +92,7 @@ export class AppGateway
   afterInit() {
     const dateString = new Date().toLocaleString();
     const message = `[WebSocket] ${process.pid} - ${dateString} LOG [WebSocketServer] Websocket server successfully started`;
-    console.log(message);
+    console.log(message, this.server);
   }
 
   handleDisconnect(client: Socket) {

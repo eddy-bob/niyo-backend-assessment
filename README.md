@@ -64,7 +64,7 @@ The server runs on port 5000"
 
 ### Connecting to the websocket
 
-The websocket (socket.io) runs on the port 80.
+The websocket (socket.io) runs on the port 4000.
 The socket server emits and listens for three events:
 
 CREATE_TASK: this is the event which the server listens for to create a new task . The server also emits back to the client on this event with the newly created task info. This event expects a payload containing the createTaskDto object.

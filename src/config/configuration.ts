@@ -17,6 +17,7 @@ export interface DatabaseConfig {
 export default () => ({
   nodeEnv: process.env.NODE_ENV,
   appUrl: process.env.APP_URL,
+  socketDebugUrl: process.env.SOCKET_URL,
   FrontEndUrl: process.env.FRONT_END_URL,
   port: parseInt(process.env.PORT, 10) || 8080,
   database: {
