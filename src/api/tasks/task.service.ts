@@ -1,4 +1,5 @@
 import {
+  ForbiddenException,
   HttpCode,
   HttpStatus,
   Injectable,
@@ -16,6 +17,7 @@ import { SuccessResponse } from 'src/utils/response';
 import { Status } from 'src/types/task';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { UpdateTaskAsAdminDto } from './dto/update-task-as-admin.dto';
+import { Role } from 'src/types/user';
 
 @Injectable()
 export class TaskService {
@@ -66,7 +68,7 @@ export class TaskService {
    * This method assigns and reassigns a task task to a user
    * @param {string} userId - ID  of the user to whom the task is to be assigned to
    * @param {string}  taskId - ID of the task to be assigned
-   * @returns {Promise<SUccessResponse>}  The response containing the found assigned task and the success response message
+   * @returns {Promise<SuccessResponse>}  The response containing the found assigned task and the success response message
    */
   async assignTask(userId: string, taskId: string) {
     // Find a user to assign the task to with the provided user id and throw a not found exception if user does not exist
@@ -147,24 +149,29 @@ export class TaskService {
    * A method that updates the status of a task
    * @param {string} taskId -The ID of the task to be updated.
    * @param  {UpdateTaskDto} payload - The payload containing the status to update the task to
+   * @param  {User} user - The object instance of the currently logged in user
    * @param {string} payload.status - The status to update the task to. this is an enum containing PENDING,COMPLETED AND IN-PROGRESS
    * @returns {Promise<SuccessResponse>} - The response containing the updated task and the success message
    */
-  async updateTaskStatus(taskId: string, payload: UpdateTaskDto) {
+  async updateTaskStatus(taskId: string, payload: UpdateTaskDto, user: User) {
     // find a task with the provided task id
-    const task = await this.findOne(taskId);
+    let task: Task = (await this.findOne(taskId)).data;
 
-    let updatedTask = task.data as Task;
+    // throw a forbidden exception if you are not admin and the task wasnt assigned to you
+    if (user.role !== Role.ADMIN && task.user.id !== user.id) {
+      throw new ForbiddenException('This task was not assigned to you');
+    }
 
     // update the task with the status provided as a param and save it to the database
-    updatedTask.status = payload.status;
-    updatedTask = await this.taskRepository.save(updatedTask);
+    task.status = payload.status;
+    task = await this.taskRepository.save(task);
 
-    return new SuccessResponse(updatedTask, 'Task status updated successfully');
+    return new SuccessResponse(task, 'Task status updated successfully');
   }
 
   /**
    * This method updates a task
+   * @param {string} taskId -TJe ID of the task to be updated
    * @param {CreateTaskDto} payload -the payload containing the details the task is to be updated to
    * @param {string} payload.title - The title of the task to be updated to. This is optional.
    * @param {string} payload.comment- The new comment on the task . This is optional.
@@ -174,11 +181,12 @@ export class TaskService {
    */
   async updateTask(taskId: string, payload: UpdateTaskAsAdminDto) {
     // find a task with the provided task id and throw a Not Found exception when it isnt found
-    const task = await this.findOne(taskId);
+    await this.findOne(taskId);
 
     // Check if user provided in payload exists
     if (payload.user) {
       const user = await this.userService.findOneProfile(payload.user);
+
       // update the task with new information provided as a param and save it to the database
       await this.taskRepository.update(taskId, {
         ...payload,

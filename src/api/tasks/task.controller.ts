@@ -64,8 +64,9 @@ export class TaskController {
   updateTaskStatus(
     payload: UpdateTaskDto,
     @Param('id', ParseUUIDPipe) id: string,
+    @CurrentUser() user: User,
   ) {
-    return this.taskService.updateTaskStatus(id, payload);
+    return this.taskService.updateTaskStatus(id, payload, user);
   }
 
   @Roles(Role.ADMIN)
