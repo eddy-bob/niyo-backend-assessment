@@ -117,7 +117,7 @@ export class TaskService {
 
     // if status is available as query, fetch the tasks applying the provided query
     if (status) {
-      tasks.andWhere('task.status:=status', { status });
+      tasks.andWhere('task.status=:status', { status });
     }
     // order in decending order
     tasks.orderBy('task.created_at', 'DESC');
@@ -231,7 +231,7 @@ export class TaskService {
     }
     // if status is available as query, fetch the tasks applying the provided status query
     if (status) {
-      tasks.andWhere('task.status:=status', { status });
+      tasks.andWhere('task.status =:status', { status });
     }
     // order in decending order
     tasks.orderBy('task.created_at', 'DESC');

@@ -81,7 +81,7 @@ export class TaskController {
   @HttpCode(HttpStatus.FOUND)
   findAll(
     @Query('status') status: Status,
-    @Query('user', ParseUUIDPipe) user: string,
+    @Query('user') user: string,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page = 1,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit = 10,
   ) {
@@ -90,7 +90,7 @@ export class TaskController {
       {
         page,
         limit,
-        route: `${this.configService.get<string>('appUrl')}/tasks/`,
+        route: `${this.configService.get<string>('appUrl')}/tasks`,
       },
     );
   }
