@@ -6,10 +6,7 @@ import { Task } from './entities/task.entity';
 import { APP_GUARD } from '@nestjs/core';
 import { UsersModule } from '../users/users.module';
 import { RolesGuard } from '../auth/guards/roles.guard';
-import { AppGateway } from 'src/app.gateway';
-import { APP_GATEWAY } from 'src/constant';
-import { JwtModule } from '@nestjs/jwt';
-import configuration from 'src/config/configuration';
+
 
 @Module({
   imports: [UsersModule, TypeOrmModule.forFeature([Task])],

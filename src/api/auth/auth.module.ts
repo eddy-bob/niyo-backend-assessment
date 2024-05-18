@@ -9,7 +9,8 @@ import { JwtStrategy } from './guards/jwt.strategy';
 import { LoggerModule } from 'src/logger/logger.module';
 import { JwtModule } from '@nestjs/jwt';
 import configuration from 'src/config/configuration';
-
+import { Jwt } from 'src/providers/jwt.provider';
+import { JWT } from 'src/constant';
 @Module({
   imports: [
     JwtModule.register({
@@ -21,7 +22,15 @@ import configuration from 'src/config/configuration';
     LoggerModule,
   ],
   controllers: [AuthController],
-  providers: [LocalStrategy, JwtStrategy, AuthService],
+  providers: [
+    LocalStrategy,
+    JwtStrategy,
+    AuthService,
+    {
+      provide: JWT,
+      useClass: Jwt,
+    },
+  ],
   exports: [AuthService],
 })
 export class AuthModule {}

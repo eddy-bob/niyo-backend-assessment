@@ -13,7 +13,10 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
 import { TaskModule } from './api/tasks/task.module';
 import { UsersModule } from './api/users/users.module';
-
+import { AppGateway } from 'src/app.gateway';
+import { APP_GATEWAY } from 'src/constant';
+import { Jwt } from './providers/jwt.provider';
+import { JWT } from 'src/constant';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -45,6 +48,14 @@ import { UsersModule } from './api/users/users.module';
     {
       provide: APP_INTERCEPTOR,
       useClass: ErrorsInterceptor,
+    },
+    {
+      provide: JWT,
+      useClass: Jwt,
+    },
+    {
+      provide: APP_GATEWAY,
+      useClass: AppGateway,
     },
   ],
 })

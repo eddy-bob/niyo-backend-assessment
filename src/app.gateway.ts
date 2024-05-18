@@ -36,7 +36,9 @@ export class AppGateway
     private readonly taskService: TaskService,
     @Inject(JWT)
     private readonly jwtService: Jwt,
-  ) {}
+  ) {
+    console.log('RannnnE');
+  }
 
   // initialize the native websocket server and load it onto an variable 'server'
   @WebSocketServer() server: Server;
